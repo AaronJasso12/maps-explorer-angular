@@ -1,12 +1,14 @@
 import { AfterViewInit, Component, ElementRef, signal, viewChild } from '@angular/core';
-import * as mapboxgl from 'mapbox-gl/esm';
 import { environment } from '../../../environments/environment';
 import { v4 as UUIDV4 } from 'uuid';
 import { LngLatLike } from 'mapbox-gl';
 import type { Marker } from './interfaces/marker.interface';
 import { MarkerItem } from './components/marker-item/marker-item';
 
-const MAPBOX_TOKEN = environment.mapboxKey;
+import type mapboxglType from 'mapbox-gl';
+declare const mapboxgl: typeof mapboxglType;
+
+mapboxgl.accessToken = environment.mapboxKey;
 
 @Component({
   selector: 'app-markers-page',
@@ -25,7 +27,6 @@ export class MarkersPage implements AfterViewInit{
     const element = this.divElement()!.nativeElement;
 
     const map = new mapboxgl.Map({
-        accessToken: MAPBOX_TOKEN, // associates the map with your Mapbox account and its permissions
         container: element, // container ID
         center: [139.7622578262909, 35.69124716164654], // starting position [lng, lat]. Note that lat must be set between -90 and 90
         zoom: 14 // starting zoom

@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, ElementRef, input, signal, viewChild } from '@angular/core';
 import { HouseProperty } from '../../../pages/houses-page/interfaces/house-property.interface';
-import * as mapboxgl from 'mapbox-gl/esm';
 import { Marker } from '../../../pages/markers-page/interfaces/marker.interface';
 import { environment } from '../../../../environments/environment';
 
-const MAPBOX_TOKEN = environment.mapboxKey;
+import type mapboxglType from 'mapbox-gl';
+declare const mapboxgl: typeof mapboxglType;
+
+mapboxgl.accessToken = environment.mapboxKey;
 
 @Component({
   selector: 'app-mini-map',
@@ -21,7 +23,6 @@ export class MiniMap implements AfterViewInit{
     const element = this.mapElement()!.nativeElement;
 
     const map = new mapboxgl.Map({
-      accessToken: MAPBOX_TOKEN,
       container: element,
       center: this.lngLat(),
       zoom: this.zoom(),
