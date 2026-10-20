@@ -1,0 +1,16 @@
+<div
+  class="w-full min-w-0"
+  (click)="markerClick.emit()"
+  (dblclick)="markerDoubleClick.emit()"
+>
+  <label class="label flex w-full min-w-0 text-xs cursor-pointer gap-2 whitespace-normal">
+    <span class="min-w-0 flex-1 wrap-break-words text-black">
+      {{ marker().mapboxMarker.getLngLat() | json }}
+    </span>
+    <input
+      type="radio"
+      name="radio-12"
+      class="radio shrink-0"
+      [style]="{ backgroundColor: marker().mapboxMarker._color }" />
+  </label>
+</div>
