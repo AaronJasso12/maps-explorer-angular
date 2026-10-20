@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, effect, ElementRef, signal, viewChild } from '@angular/core';
-import * as mapboxgl from 'mapbox-gl/esm';
+// import * as mapboxgl from 'mapbox-gl/esm';
 import { environment } from '../../../environments/environment';
 import { DecimalPipe, JsonPipe } from '@angular/common';
-// import 'mapbox-gl/dist/mapbox-gl.css';
 
-const MAPBOX_TOKEN = environment.mapboxKey;
+import type mapboxglType from 'mapbox-gl';
+declare const mapboxgl: typeof mapboxglType;
+
+// const MAPBOX_TOKEN = environment.mapboxKey;
+mapboxgl.accessToken = environment.mapboxKey;
 
 @Component({
   selector: 'app-fullscreen-map-page',
@@ -54,11 +57,9 @@ export class FullscreenMapPage implements AfterViewInit{
     const {lat , lng} = this.coordinates();
 
     const map = new mapboxgl.Map({
-        accessToken: MAPBOX_TOKEN, // associates the map with your Mapbox account and its permissions
         container: element, // container ID
         center: [lng, lat], // starting position [lng, lat]. Note that lat must be set between -90 and 90
         zoom: this.zoom(), // starting zoom
-        style: 'mapbox://styles/mapbox/streets-v12', // Use the standard style for the map
     });
 
     this.mapListeners(map);
