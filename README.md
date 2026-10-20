@@ -97,3 +97,4 @@ Los archivos compilados se generan dentro de `dist/`.
 ## 📚 Propósito del proyecto
 
 Proyecto de aprendizaje para practicar el desarrollo de aplicaciones con Angular, el uso de componentes reutilizables, la navegación entre páginas y la integración de mapas interactivos con Mapbox GL JS.
+
